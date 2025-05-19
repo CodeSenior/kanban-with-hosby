@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://hosy.io/hosby.svg" alt="Hosby Logo" width="200" />
+  <img src="https://hosby.io/hosby.svg" alt="Hosby Logo" width="200" />
   <img src="https://docs.hosby.io/nextjs-icon.svg" alt="Next.js Logo" width="100" />
 </div>
 
