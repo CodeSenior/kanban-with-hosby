@@ -11,6 +11,8 @@ import { formatDate } from "@/lib/utils"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { useState } from "react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { toast } from "sonner"
+import { KanbanService } from "@/lib/hosby.service"
 
 interface TaskCardProps {
   task: Task
@@ -35,6 +37,17 @@ export default function TaskCard({ task, onEdit, isDragging = false, onDragStart
       default:
         return "bg-slate-500 hover:bg-slate-600"
     }
+  }
+
+  const handleDelete = async (id: string) => {
+   try {
+       deleteTask(id)
+      const kanbanService = new KanbanService()
+      await kanbanService.deleteTask(id)
+   } catch (error) {
+     console.error("Error deleting task:", error)
+     toast.error("Failed to delete task")
+   }
   }
 
   return (
@@ -70,7 +83,7 @@ export default function TaskCard({ task, onEdit, isDragging = false, onDragStart
                       }}>Edit</DropdownMenuItem>
                       <DropdownMenuItem onClick={(e) => {
                         e.stopPropagation()
-                        deleteTask(task.id)
+                        handleDelete(task.id)
                       }} className="text-red-600">
                         Delete
                       </DropdownMenuItem>
